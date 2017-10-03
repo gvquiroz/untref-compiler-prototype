@@ -33,13 +33,13 @@ void yyerror(const char* s);
 
 %%
 
-calculadora: 
+calculadora:
 	   | calculadora line
 ;
 
 line: NUEVA_LINEA
-    | expresion_entero NUEVA_LINEA { printf("\tResultado: %i\n", $1); } 
-    | expresion_caracter NUEVA_LINEA { printf("\tResultado: %c\n", $1); } 
+    | expresion_entero NUEVA_LINEA { printf("\tResultado: %i\n", $1); }
+    | expresion_caracter NUEVA_LINEA { printf("\tResultado: %c\n", $1); }
     | SALIR NUEVA_LINEA { printf("bye!\n"); exit(0); }
 ;
 
@@ -49,16 +49,16 @@ expresion_entero: ENTERO				{ $$ = $1; }
 	| expresion_entero MULTIPLICACION expresion_entero	{ $$ = $1 * $3; }
 	| expresion_entero DIVISION expresion_entero	{ $$ = $1 / $3; }
 	| expresion_entero MENOR expresion_entero	{ $$ = $1 < $3; }
-	| expresion_entero MENOR_IGUAL expresion_entero	{ $$ = $1 <= $3; }	
+	| expresion_entero MENOR_IGUAL expresion_entero	{ $$ = $1 <= $3; }
 	| expresion_entero MAYOR expresion_entero	{ $$ = $1 > $3; }
 	| expresion_entero MAYOR_IGUAL expresion_entero	{ $$ = $1 >= $3; }
-	| expresion_entero COMPARADOR expresion_entero	{ $$ = $1 == $3; }	
-	| expresion_entero DISTINTO expresion_entero	{ $$ = $1 != $3; }	
+	| expresion_entero COMPARADOR expresion_entero	{ $$ = $1 == $3; }
+	| expresion_entero DISTINTO expresion_entero	{ $$ = $1 != $3; }
 ;
 
-expresion_caracter: ENTERO				{ $$ = $1; }
-	| expresion_caracter COMPARADOR expresion_caracter	{ $$ = $1 == $3; }	
-	| expresion_caracter DISTINTO expresion_caracter	{ $$ = $1 != $3; }	
+expresion_caracter: CHAR				{ $$ = $1; }
+	| expresion_caracter COMPARADOR expresion_caracter	{ $$ = $1 == $3; }
+	| expresion_caracter DISTINTO expresion_caracter	{ $$ = $1 != $3; }
 ;
 
 
@@ -67,7 +67,7 @@ expresion_caracter: ENTERO				{ $$ = $1; }
 int main() {
 	yyin = stdin;
 
-	do { 
+	do {
 		yyparse();
 	} while(!feof(yyin));
 

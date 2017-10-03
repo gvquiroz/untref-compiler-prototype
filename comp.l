@@ -6,7 +6,7 @@
 
 #define YY_DECL int yylex()
 
-#include "calc.tab.h"
+#include "comp.tab.h"
 
 %}
 
@@ -14,7 +14,7 @@
 
 [ \t]	;
 [0-9]+				{yylval.numero = atoi(yytext); return ENTERO;}
-["]{1}.{1}["]{1} 	{strcpy (yylval.caracter, yytext); return  CHAR;}
+[a-z] 	{strcpy (yylval.caracter, yytext); return  CHAR;}
 
 \n			{return NUEVA_LINEA;}
 
