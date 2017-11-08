@@ -1,7 +1,7 @@
-Where is Cocucha?
+Jathon Compiler
 =================
 
-Where is Cocucha? Language
+Jathon Language
 
 Dependencias:
 
