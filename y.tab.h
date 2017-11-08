@@ -39,76 +39,60 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ENTERO = 258,
-     CHAR = 259,
-     SUMA = 260,
-     RESTA = 261,
-     MULTIPLICACION = 262,
-     DIVISION = 263,
-     NUEVA_LINEA = 264,
-     SALIR = 265,
-     IGUAL = 266,
-     DISTINTO = 267,
-     COMPARADOR = 268,
-     MAYOR_IGUAL = 269,
-     MENOR_IGUAL = 270,
-     PAR_ABRE = 271,
-     PAR_CIERRA = 272,
-     MAYOR = 273,
-     MENOR = 274,
-     LLAVE_ABRE = 275,
-     LLAVE_CIERRA = 276,
-     AND = 277,
-     OR = 278,
-     NOT = 279,
-     IF = 280,
-     FOR = 281,
-     WHILE = 282,
-     COMA = 283,
-     ELSE = 284
+     TYPE_NUMBER = 258,
+     TYPE_BOOLEAN = 259,
+     TYPE_STRING = 260,
+     DEF = 261,
+     AS = 262,
+     ASSIGN = 263,
+     IF = 264,
+     WHILE = 265,
+     OP_ARI = 266,
+     OP_LOG = 267,
+     LP = 268,
+     RP = 269,
+     LC = 270,
+     RC = 271,
+     NUMBER = 272,
+     BOOLEAN = 273,
+     STRING = 274,
+     VAR_NAME = 275
    };
 #endif
 /* Tokens.  */
-#define ENTERO 258
-#define CHAR 259
-#define SUMA 260
-#define RESTA 261
-#define MULTIPLICACION 262
-#define DIVISION 263
-#define NUEVA_LINEA 264
-#define SALIR 265
-#define IGUAL 266
-#define DISTINTO 267
-#define COMPARADOR 268
-#define MAYOR_IGUAL 269
-#define MENOR_IGUAL 270
-#define PAR_ABRE 271
-#define PAR_CIERRA 272
-#define MAYOR 273
-#define MENOR 274
-#define LLAVE_ABRE 275
-#define LLAVE_CIERRA 276
-#define AND 277
-#define OR 278
-#define NOT 279
-#define IF 280
-#define FOR 281
-#define WHILE 282
-#define COMA 283
-#define ELSE 284
+#define TYPE_NUMBER 258
+#define TYPE_BOOLEAN 259
+#define TYPE_STRING 260
+#define DEF 261
+#define AS 262
+#define ASSIGN 263
+#define IF 264
+#define WHILE 265
+#define OP_ARI 266
+#define OP_LOG 267
+#define LP 268
+#define RP 269
+#define LC 270
+#define RC 271
+#define NUMBER 272
+#define BOOLEAN 273
+#define STRING 274
+#define VAR_NAME 275
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 13 "comp.y"
+#line 21 "wic.y"
 {
-	int numero;
-	char caracter;
+  double value;
+  char symbol[50];
+  int type;
+  Variable var;
 }
 /* Line 1529 of yacc.c.  */
-#line 112 "comp.tab.h"
+#line 96 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

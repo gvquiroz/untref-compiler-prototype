@@ -1,0 +1,46 @@
+variableNumerica :: number
+variableBooleana :: boolean
+variableString :: string
+
+variableNumerica : 123
+
+while (variableBooleana) {
+  variableBooleana : false
+}
+
+while (not variableBooleana) {
+  variableBooleana : true
+}
+
+variableString : "Cocuzza"
+
+variableNumerica : (variableNumerica - 10)
+
+if (variableNumerica <  124) {
+  variableBooleana : (variableNumerica <  124)
+  variableNumerica : 0
+}
+
+while (not variableBooleana) {
+  variableBooleana : true
+
+  if (variableNumerica <  124) {
+    variableBooleana : (variableNumerica <  124)
+  }
+
+}
+
+variableString : "Cocuzza"
+
+variableNumerica : (variableNumerica - 10)
+
+entrada :: number
+resultado :: number
+
+entrada : 5
+resultado : 1
+
+while (entrada > 0) {
+  resultado : (resultado * entrada)
+  entrada : (entrada - 1)
+}

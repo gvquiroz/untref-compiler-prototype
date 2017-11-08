@@ -66,79 +66,69 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ENTERO = 258,
-     CHAR = 259,
-     SUMA = 260,
-     RESTA = 261,
-     MULTIPLICACION = 262,
-     DIVISION = 263,
-     NUEVA_LINEA = 264,
-     SALIR = 265,
-     IGUAL = 266,
-     DISTINTO = 267,
-     COMPARADOR = 268,
-     MAYOR_IGUAL = 269,
-     MENOR_IGUAL = 270,
-     PAR_ABRE = 271,
-     PAR_CIERRA = 272,
-     MAYOR = 273,
-     MENOR = 274,
-     LLAVE_ABRE = 275,
-     LLAVE_CIERRA = 276,
-     AND = 277,
-     OR = 278,
-     NOT = 279,
-     IF = 280,
-     FOR = 281,
-     WHILE = 282,
-     COMA = 283,
-     ELSE = 284
+     TYPE_NUMBER = 258,
+     TYPE_BOOLEAN = 259,
+     TYPE_STRING = 260,
+     DEF = 261,
+     AS = 262,
+     ASSIGN = 263,
+     IF = 264,
+     WHILE = 265,
+     OP_ARI = 266,
+     OP_LOG = 267,
+     LP = 268,
+     RP = 269,
+     LC = 270,
+     RC = 271,
+     NUMBER = 272,
+     BOOLEAN = 273,
+     STRING = 274,
+     VAR_NAME = 275
    };
 #endif
 /* Tokens.  */
-#define ENTERO 258
-#define CHAR 259
-#define SUMA 260
-#define RESTA 261
-#define MULTIPLICACION 262
-#define DIVISION 263
-#define NUEVA_LINEA 264
-#define SALIR 265
-#define IGUAL 266
-#define DISTINTO 267
-#define COMPARADOR 268
-#define MAYOR_IGUAL 269
-#define MENOR_IGUAL 270
-#define PAR_ABRE 271
-#define PAR_CIERRA 272
-#define MAYOR 273
-#define MENOR 274
-#define LLAVE_ABRE 275
-#define LLAVE_CIERRA 276
-#define AND 277
-#define OR 278
-#define NOT 279
-#define IF 280
-#define FOR 281
-#define WHILE 282
-#define COMA 283
-#define ELSE 284
+#define TYPE_NUMBER 258
+#define TYPE_BOOLEAN 259
+#define TYPE_STRING 260
+#define DEF 261
+#define AS 262
+#define ASSIGN 263
+#define IF 264
+#define WHILE 265
+#define OP_ARI 266
+#define OP_LOG 267
+#define LP 268
+#define RP 269
+#define LC 270
+#define RC 271
+#define NUMBER 272
+#define BOOLEAN 273
+#define STRING 274
+#define VAR_NAME 275
 
 
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "comp.y"
-
+#line 1 "wic.y"
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+#include "data_structs.h"
 
-extern int yylex();
-extern int yyparse();
-extern FILE* yyin;
+extern int yylineno;
+extern FILE *yyin;
 
-void yyerror(const char* s);
+int yylex();
+int yyerror(const char *p);
+int getType(char *name);
+void addNode(char *name, SymbolType type);
+void printSymbolTable();
+
+Symbol symbolTable[50];
+
+int symbolTableIndex;
+
 
 
 /* Enabling traces.  */
@@ -161,13 +151,15 @@ void yyerror(const char* s);
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 13 "comp.y"
+#line 21 "wic.y"
 {
-	int numero;
-	char caracter;
+  double value;
+  char symbol[50];
+  int type;
+  Variable var;
 }
 /* Line 193 of yacc.c.  */
-#line 171 "comp.tab.c"
+#line 163 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -180,7 +172,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 184 "comp.tab.c"
+#line 176 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -393,22 +385,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  2
+#define YYFINAL  14
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   67
+#define YYLAST   95
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  30
+#define YYNTOKENS  21
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  5
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  21
+#define YYNRULES  33
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  37
+#define YYNSTATES  77
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   284
+#define YYMAXUTOK   275
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -443,8 +435,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29
+      15,    16,    17,    18,    19,    20
 };
 
 #if YYDEBUG
@@ -452,29 +443,39 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     4,     7,     9,    12,    15,    18,    20,
-      24,    28,    32,    36,    40,    44,    48,    52,    56,    60,
-      62,    66
+       0,     0,     3,     5,     8,    10,    12,    14,    16,    20,
+      24,    28,    32,    36,    40,    44,    48,    54,    60,    66,
+      72,    78,    84,    90,    96,    98,   101,   105,   109,   113,
+     117,   125,   133,   141
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      31,     0,    -1,    -1,    31,    32,    -1,     9,    -1,    33,
-       9,    -1,    34,     9,    -1,    10,     9,    -1,     3,    -1,
-      33,     5,    33,    -1,    33,     6,    33,    -1,    33,     7,
-      33,    -1,    33,     8,    33,    -1,    33,    19,    33,    -1,
-      33,    15,    33,    -1,    33,    18,    33,    -1,    33,    14,
-      33,    -1,    33,    13,    33,    -1,    33,    12,    33,    -1,
-       4,    -1,    34,    13,    34,    -1,    34,    12,    34,    -1
+      22,     0,    -1,    23,    -1,    22,    23,    -1,    24,    -1,
+      25,    -1,    28,    -1,    29,    -1,    20,     7,     3,    -1,
+      20,     7,     4,    -1,    20,     7,     5,    -1,    20,     8,
+      17,    -1,    20,     8,    27,    -1,    20,     8,    19,    -1,
+      20,     8,    26,    -1,    20,     8,    20,    -1,    13,    20,
+      12,    20,    14,    -1,    13,    20,    11,    20,    14,    -1,
+      13,    20,    12,    17,    14,    -1,    13,    20,    11,    17,
+      14,    -1,    13,    17,    12,    17,    14,    -1,    13,    17,
+      11,    17,    14,    -1,    13,    17,    12,    20,    14,    -1,
+      13,    17,    11,    20,    14,    -1,    18,    -1,    12,    20,
+      -1,    20,    12,    17,    -1,    17,    12,    17,    -1,    17,
+      12,    20,    -1,    20,    12,    20,    -1,    10,    13,    27,
+      14,    15,    22,    16,    -1,    10,    13,    20,    14,    15,
+      22,    16,    -1,     9,    13,    27,    14,    15,    22,    16,
+      -1,     9,    13,    20,    14,    15,    22,    16,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_uint16 yyrline[] =
 {
-       0,    36,    36,    37,    40,    41,    42,    43,    46,    47,
-      48,    49,    50,    51,    52,    53,    54,    55,    56,    59,
-      60,    61
+       0,    41,    41,    42,    44,    45,    46,    47,    49,    50,
+      51,    53,    64,    75,    86,    97,   115,   134,   153,   166,
+     179,   186,   193,   206,   220,   223,   236,   249,   252,   265,
+     285,   286,   299,   300
 };
 #endif
 
@@ -483,12 +484,11 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "ENTERO", "CHAR", "SUMA", "RESTA",
-  "MULTIPLICACION", "DIVISION", "NUEVA_LINEA", "SALIR", "IGUAL",
-  "DISTINTO", "COMPARADOR", "MAYOR_IGUAL", "MENOR_IGUAL", "PAR_ABRE",
-  "PAR_CIERRA", "MAYOR", "MENOR", "LLAVE_ABRE", "LLAVE_CIERRA", "AND",
-  "OR", "NOT", "IF", "FOR", "WHILE", "COMA", "ELSE", "$accept",
-  "calculadora", "line", "expresion_entero", "expresion_caracter", 0
+  "$end", "error", "$undefined", "TYPE_NUMBER", "TYPE_BOOLEAN",
+  "TYPE_STRING", "DEF", "AS", "ASSIGN", "IF", "WHILE", "OP_ARI", "OP_LOG",
+  "LP", "RP", "LC", "RC", "NUMBER", "BOOLEAN", "STRING", "VAR_NAME",
+  "$accept", "programa", "sentencia", "declaracion", "asignacion",
+  "operacion", "booleano", "bucle", "condicional", 0
 };
 #endif
 
@@ -499,24 +499,26 @@ static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284
+     275
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    30,    31,    31,    32,    32,    32,    32,    33,    33,
-      33,    33,    33,    33,    33,    33,    33,    33,    33,    34,
-      34,    34
+       0,    21,    22,    22,    23,    23,    23,    23,    24,    24,
+      24,    25,    25,    25,    25,    25,    26,    26,    26,    26,
+      26,    26,    26,    26,    27,    27,    27,    27,    27,    27,
+      28,    28,    29,    29
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     0,     2,     1,     2,     2,     2,     1,     3,
-       3,     3,     3,     3,     3,     3,     3,     3,     3,     1,
-       3,     3
+       0,     2,     1,     2,     1,     1,     1,     1,     3,     3,
+       3,     3,     3,     3,     3,     3,     5,     5,     5,     5,
+       5,     5,     5,     5,     1,     2,     3,     3,     3,     3,
+       7,     7,     7,     7
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -524,33 +526,41 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       2,     0,     1,     8,    19,     4,     0,     3,     0,     0,
-       7,     0,     0,     0,     0,     5,     0,     0,     0,     0,
-       0,     0,     6,     0,     0,     9,    10,    11,    12,    18,
-      17,    16,    14,    15,    13,    21,    20
+       0,     0,     0,     0,     0,     2,     4,     5,     6,     7,
+       0,     0,     0,     0,     1,     3,     0,     0,    24,     0,
+       0,     0,     0,     8,     9,    10,     0,    11,    13,    15,
+      14,    12,    25,     0,     0,     0,     0,     0,     0,     0,
+       0,    27,    28,    26,    29,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    33,    32,    31,    30,    21,
+      23,    20,    22,    19,    17,    18,    16
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     1,     7,     8,     9
+      -1,     4,     5,     6,     7,    30,    20,     8,     9
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -13
+#define YYPACT_NINF -16
 static const yytype_int8 yypact[] =
 {
-     -13,    50,   -13,   -13,   -13,   -13,    11,   -13,    -5,    54,
-     -13,    16,    16,    16,    16,   -13,    16,    16,    16,    16,
-      16,    16,   -13,    17,    17,    19,    19,    43,    43,    10,
-      10,    10,    10,    10,    10,    -7,    -7
+      18,    -1,    16,    70,     1,   -16,   -16,   -16,   -16,   -16,
+      27,    36,    28,    23,   -16,   -16,   -15,     7,   -16,    -8,
+      11,    61,    32,   -16,   -16,   -16,     0,     7,   -16,    25,
+     -16,   -16,   -16,    44,    45,    40,    66,    69,    72,    68,
+      71,   -16,   -16,   -16,   -16,    18,    18,    18,    18,    46,
+      50,    51,    52,    -7,    -2,     6,    14,    74,    75,    76,
+      77,    78,    79,    80,    81,   -16,   -16,   -16,   -16,   -16,
+     -16,   -16,   -16,   -16,   -16,   -16,   -16
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -13,   -13,   -13,    28,   -12
+     -16,    12,    -4,   -16,   -16,   -16,    63,   -16,   -16
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -560,34 +570,44 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      11,    12,    13,    14,    15,    23,    24,    16,    17,    18,
-      19,    35,    36,    20,    21,    11,    12,    13,    14,     3,
-      10,     4,    16,    17,    18,    19,    13,    14,    20,    21,
-       0,    16,    17,    18,    19,     0,     0,    20,    21,    25,
-      26,    27,    28,     0,    29,    30,    31,    32,    33,    34,
-       2,     0,     0,     3,     4,    16,    17,    18,    19,     5,
-       6,    20,    21,    22,     0,     0,    23,    24
+      15,    14,     1,     2,    34,    32,    35,     1,     2,    65,
+       1,     2,    10,     3,    66,     1,     2,    39,     3,    33,
+      40,     3,    67,     1,     2,    36,     3,     1,     2,    11,
+      68,    23,    24,    25,     3,    16,    26,    34,     3,    16,
+      27,    18,    28,    29,    17,    18,    38,    19,    16,    15,
+      15,    15,    15,    17,    18,    45,    21,    53,    54,    55,
+      56,    41,    43,    57,    42,    44,    58,    59,    61,    63,
+      60,    62,    64,    34,    22,    37,    31,    12,    13,    49,
+      50,    46,    51,    52,    47,     0,     0,    48,    69,    70,
+      71,    72,    73,    74,    75,    76
 };
 
 static const yytype_int8 yycheck[] =
 {
-       5,     6,     7,     8,     9,    12,    13,    12,    13,    14,
-      15,    23,    24,    18,    19,     5,     6,     7,     8,     3,
-       9,     4,    12,    13,    14,    15,     7,     8,    18,    19,
-      -1,    12,    13,    14,    15,    -1,    -1,    18,    19,    11,
-      12,    13,    14,    -1,    16,    17,    18,    19,    20,    21,
-       0,    -1,    -1,     3,     4,    12,    13,    14,    15,     9,
-      10,    18,    19,     9,    -1,    -1,    12,    13
+       4,     0,     9,    10,    12,    20,    14,     9,    10,    16,
+       9,    10,    13,    20,    16,     9,    10,    17,    20,    12,
+      20,    20,    16,     9,    10,    14,    20,     9,    10,    13,
+      16,     3,     4,     5,    20,    12,    13,    12,    20,    12,
+      17,    18,    19,    20,    17,    18,    14,    20,    12,    53,
+      54,    55,    56,    17,    18,    15,    20,    45,    46,    47,
+      48,    17,    17,    17,    20,    20,    20,    17,    17,    17,
+      20,    20,    20,    12,    11,    14,    13,     7,     8,    11,
+      12,    15,    11,    12,    15,    -1,    -1,    15,    14,    14,
+      14,    14,    14,    14,    14,    14
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    31,     0,     3,     4,     9,    10,    32,    33,    34,
-       9,     5,     6,     7,     8,     9,    12,    13,    14,    15,
-      18,    19,     9,    12,    13,    33,    33,    33,    33,    33,
-      33,    33,    33,    33,    33,    34,    34
+       0,     9,    10,    20,    22,    23,    24,    25,    28,    29,
+      13,    13,     7,     8,     0,    23,    12,    17,    18,    20,
+      27,    20,    27,     3,     4,     5,    13,    17,    19,    20,
+      26,    27,    20,    12,    12,    14,    14,    14,    14,    17,
+      20,    17,    20,    17,    20,    15,    15,    15,    15,    11,
+      12,    11,    12,    22,    22,    22,    22,    17,    20,    17,
+      20,    17,    20,    17,    20,    16,    16,    16,    16,    14,
+      14,    14,    14,    14,    14,    14,    14
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1401,94 +1421,381 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 5:
-#line 41 "comp.y"
-    { printf("\tResultado: %i\n", (yyvsp[(1) - (2)].numero)); ;}
-    break;
-
-  case 6:
-#line 42 "comp.y"
-    { printf("\tResultado: %c\n", (yyvsp[(1) - (2)].caracter)); ;}
+        case 3:
+#line 42 "wic.y"
+    {}
     break;
 
   case 7:
-#line 43 "comp.y"
-    { printf("bye!\n"); exit(0); ;}
+#line 47 "wic.y"
+    {}
     break;
 
   case 8:
-#line 46 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (1)].numero); ;}
+#line 49 "wic.y"
+    { addNode((yyvsp[(2) - (3)].symbol), T_NUMBER); }
     break;
 
   case 9:
-#line 47 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) + (yyvsp[(3) - (3)].numero); ;}
+#line 50 "wic.y"
+    { addNode((yyvsp[(2) - (3)].symbol), T_BOOLEAN); }
     break;
 
   case 10:
-#line 48 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) - (yyvsp[(3) - (3)].numero); ;}
+#line 51 "wic.y"
+    { addNode((yyvsp[(2) - (3)].symbol), T_STRING); }
     break;
 
   case 11:
-#line 49 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) * (yyvsp[(3) - (3)].numero); ;}
+#line 53 "wic.y"
+    {
+                                        SymbolType type = getType((yyvsp[(1) - (3)].symbol));
+
+                                        if (type == -1) {
+                                          yyerror("Variable no declarada");
+                                        }
+
+                                        if (type != (yyvsp[(3) - (3)].type)) {
+                                          yyerror("Error de tipos en asignacion");
+                                        }
+                                      }
     break;
 
   case 12:
-#line 50 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) / (yyvsp[(3) - (3)].numero); ;}
+#line 64 "wic.y"
+    {
+                                        SymbolType type = getType((yyvsp[(1) - (3)].symbol));
+
+                                        if (type == -1) {
+                                          yyerror("Variable no declarada");
+                                        }
+
+                                        if (type != (yyvsp[(3) - (3)].type)) {
+                                          yyerror("Error de tipos en asignacion");
+                                        }
+                                      }
     break;
 
   case 13:
-#line 51 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) < (yyvsp[(3) - (3)].numero); ;}
+#line 75 "wic.y"
+    {
+                                        SymbolType type = getType((yyvsp[(1) - (3)].symbol));
+
+                                        if (type == -1) {
+                                          yyerror("Variable no declarada");
+                                        }
+
+                                        if (type != (yyvsp[(3) - (3)].type)) {
+                                          yyerror("Error de tipos en asignacion");
+                                        }
+                                      }
     break;
 
   case 14:
-#line 52 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) <= (yyvsp[(3) - (3)].numero); ;}
+#line 86 "wic.y"
+    {
+                                        SymbolType type = getType((yyvsp[(1) - (3)].symbol));
+
+                                        if (type == -1) {
+                                          yyerror("Variable no declarada");
+                                        }
+
+                                        if (type != (yyvsp[(3) - (3)].type)) {
+                                          yyerror("Error de tipos en asignacion");
+                                        }
+                                      }
     break;
 
   case 15:
-#line 53 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) > (yyvsp[(3) - (3)].numero); ;}
+#line 97 "wic.y"
+    {
+                                        SymbolType type_left = getType((yyvsp[(1) - (3)].symbol));
+
+                                        if (type_left == -1) {
+                                          yyerror("Variable no declarada");
+                                        }
+
+                                        SymbolType type_rigth = getType((yyvsp[(3) - (3)].symbol));
+
+                                        if (type_rigth == -1) {
+                                          yyerror("Variable no declarada");
+                                        }
+
+                                        if (type_left != type_rigth) {
+                                          yyerror("Error de tipos en asignacion");
+                                        }
+                                      }
     break;
 
   case 16:
-#line 54 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) >= (yyvsp[(3) - (3)].numero); ;}
+#line 115 "wic.y"
+    {
+                                            SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
+
+                                            if (type_left == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            SymbolType type_rigth = getType((yyvsp[(4) - (5)].symbol));
+
+                                            if (type_rigth == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            if (type_left != type_rigth) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_BOOLEAN;
+                                          }
     break;
 
   case 17:
-#line 55 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) == (yyvsp[(3) - (3)].numero); ;}
+#line 134 "wic.y"
+    {
+                                            SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
+
+                                            if (type_left == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            SymbolType type_rigth = getType((yyvsp[(4) - (5)].symbol));
+
+                                            if (type_rigth == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            if (type_left != type_rigth) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_NUMBER;
+                                          }
     break;
 
   case 18:
-#line 56 "comp.y"
-    { (yyval.numero) = (yyvsp[(1) - (3)].numero) != (yyvsp[(3) - (3)].numero); ;}
+#line 153 "wic.y"
+    {
+                                            SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
+
+                                            if (type_left == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            if (type_left != (yyvsp[(4) - (5)].type)) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_BOOLEAN;
+                                          }
     break;
 
   case 19:
-#line 59 "comp.y"
-    { (yyval.caracter) = (yyvsp[(1) - (1)].caracter); ;}
+#line 166 "wic.y"
+    {
+                                            SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
+
+                                            if (type_left == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            if (type_left != (yyvsp[(4) - (5)].type)) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_NUMBER;
+                                          }
     break;
 
   case 20:
-#line 60 "comp.y"
-    { (yyval.caracter) = (yyvsp[(1) - (3)].caracter) == (yyvsp[(3) - (3)].caracter); ;}
+#line 179 "wic.y"
+    {
+                                            if ((yyvsp[(2) - (5)].type) != (yyvsp[(4) - (5)].type)) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_BOOLEAN;
+                                          }
     break;
 
   case 21:
-#line 61 "comp.y"
-    { (yyval.caracter) = (yyvsp[(1) - (3)].caracter) != (yyvsp[(3) - (3)].caracter); ;}
+#line 186 "wic.y"
+    {
+                                            if ((yyvsp[(2) - (5)].type) != (yyvsp[(4) - (5)].type)) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_NUMBER;
+                                          }
+    break;
+
+  case 22:
+#line 193 "wic.y"
+    {
+                                            SymbolType type_rigth = getType((yyvsp[(4) - (5)].symbol));
+
+                                            if (type_rigth == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            if ((yyvsp[(2) - (5)].type) != type_rigth) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_BOOLEAN;
+                                          }
+    break;
+
+  case 23:
+#line 206 "wic.y"
+    {
+                                            SymbolType type_rigth = getType((yyvsp[(4) - (5)].symbol));
+
+                                            if (type_rigth == -1) {
+                                              yyerror("Variable no declarada");
+                                            }
+
+                                            if ((yyvsp[(2) - (5)].type) != type_rigth) {
+                                              yyerror("Error de tipos en operacion");
+                                            }
+
+                                            (yyval.type) = T_NUMBER;
+                                          }
+    break;
+
+  case 24:
+#line 220 "wic.y"
+    {
+                                    (yyval.type) = T_BOOLEAN;
+                                  }
+    break;
+
+  case 25:
+#line 223 "wic.y"
+    {
+                                    SymbolType type = getType((yyvsp[(2) - (2)].symbol));
+
+                                    if (type == -1) {
+                                      yyerror("Variable no declarada");
+                                    }
+
+                                    if (type != T_BOOLEAN) {
+                                      yyerror("La variable debe ser booleana");
+                                    }
+
+                                    (yyval.type) = T_BOOLEAN;
+                                  }
+    break;
+
+  case 26:
+#line 236 "wic.y"
+    {
+                                    SymbolType type_left = getType((yyvsp[(1) - (3)].symbol));
+
+                                    if (type_left == -1) {
+                                      yyerror("Variable no declarada");
+                                    }
+
+                                    if (type_left != (yyvsp[(3) - (3)].type)) {
+                                      yyerror("Error de tipos en condicion");
+                                    }
+
+                                    (yyval.type) = T_BOOLEAN;
+                                  }
+    break;
+
+  case 27:
+#line 249 "wic.y"
+    {
+                                    (yyval.type) = T_BOOLEAN;
+                                  }
+    break;
+
+  case 28:
+#line 252 "wic.y"
+    {
+                                    SymbolType type_rigth = getType((yyvsp[(3) - (3)].symbol));
+
+                                    if (type_rigth == -1) {
+                                      yyerror("Variable no declarada");
+                                    }
+
+                                    if ((yyvsp[(1) - (3)].type) != type_rigth) {
+                                      yyerror("Error de tipos en condicion");
+                                    }
+
+                                    (yyval.type) = T_BOOLEAN;
+                                  }
+    break;
+
+  case 29:
+#line 265 "wic.y"
+    {
+                                      SymbolType type_left = getType((yyvsp[(1) - (3)].symbol));
+
+                                      if (type_left == -1) {
+                                        yyerror("Variable no declarada");
+                                      }
+
+                                      SymbolType type_rigth = getType((yyvsp[(3) - (3)].symbol));
+
+                                      if (type_rigth == -1) {
+                                        yyerror("Variable no declarada");
+                                      }
+
+                                      if (type_left != type_rigth) {
+                                        yyerror("Error de tipos en condicion");
+                                      }
+
+                                      (yyval.type) = T_BOOLEAN;
+                                    }
+    break;
+
+  case 30:
+#line 285 "wic.y"
+    {}
+    break;
+
+  case 31:
+#line 286 "wic.y"
+    {
+                                              SymbolType type = getType((yyvsp[(3) - (7)].symbol));
+
+                                              if (type == -1) {
+                                                yyerror("Variable no declarada");
+                                              }
+
+                                              if (type != T_BOOLEAN) {
+                                                yyerror("Error de tipo en condicion");
+                                              }
+
+                                            }
+    break;
+
+  case 32:
+#line 299 "wic.y"
+    {}
+    break;
+
+  case 33:
+#line 300 "wic.y"
+    {
+                                                SymbolType type = getType((yyvsp[(3) - (7)].symbol));
+
+                                                if (type == -1) {
+                                                  yyerror("Variable no declarada");
+                                                }
+
+                                                if (type != T_BOOLEAN) {
+                                                  yyerror("Error de tipo en condicion");
+                                                }
+
+                                              }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1492 "comp.tab.c"
+#line 1799 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1702,21 +2009,68 @@ yyreturn:
 }
 
 
-#line 65 "comp.y"
+#line 312 "wic.y"
 
+//-- FUNCTION DEFINITIONS ---------------------------------
+int main(int argc, char *argv[]) {
+  symbolTableIndex = 0;
 
-int main() {
-	yyin = stdin;
+  yyin = fopen(argv[1], "rt");
+  yyparse();
+  fclose(yyin);
 
-	do {
-		yyparse();
-	} while(!feof(yyin));
+  printSymbolTable();
 
-	return 0;
+  printf("Compilacion existosa.\n");
+
+  return 0;
 }
 
-void yyerror(const char* s) {
-	fprintf(stderr, "Parse error: %s\n", s);
-	exit(1);
+int yyerror(const char *p) {
+  fprintf(stderr, "Error!: %s. On line: %d.\n", p, yylineno);
+}
+
+/**
+ * Agrega una variable a la tabla de símbolos.
+ * @param name Nombre de la variable.
+ * @param type Tipo de la variable.
+ */
+void addNode(char *name, SymbolType type) {
+  Symbol symbol;
+  strcpy(symbol.name, name);
+  symbol.type = type;
+  symbolTable[symbolTableIndex] = symbol;
+  symbolTableIndex++;
+}
+
+/**
+ * @param name Nombre de la variable.
+ * @return     Retorna el tipo del simbolo. Si no existe, devuelve -1.
+ */
+int getType(char *name) {
+  int i = 0;
+  while (i < symbolTableIndex) {
+    if (strcmp(name, symbolTable[i].name) == 0) {
+      return symbolTable[i].type;
+    }
+    i++;
+  }
+  return -1;
+}
+
+/**
+ * Imprime la tabla de símbolos.
+ */
+void printSymbolTable() {
+  int i;
+  char* type_name;
+  printf("Tabla de simbolos:\n");
+  printf("+----------------------+----------+\n");
+  printf("| Variable             | Tipo     |\n");
+  printf("+----------------------+----------+\n");
+  for (i = 0; i < symbolTableIndex; i++) {
+    printf("| %-20s | %-8s |\n", symbolTable[i].name, symbol_type_name[symbolTable[i].type]);
+  }
+  printf("+----------------------+----------+\n");
 }
 
