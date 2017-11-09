@@ -1,13 +1,3 @@
-/**
- * Exaples
- * -------
- * variables: asd123 | asd | a1b2c3 | aVar | aVar123
- * number: 123 | 123.456 | 0123.000
- * boolean: true | false
- * string: "Solo string y con comillas dobles"
- * operadores aritméticos: + - * /
- * operadores lógicos: and or not < > = # >= <=
- */
 %{
 #include "data_structs.h"
 #include "y.tab.h"
@@ -21,7 +11,6 @@ STRING \"[^\"]*["]
 BOOLEAN "true"|"false"
 VAR_NAME [a-zA-Z][a-zA-Z0-9]*
 %%
-"def"                   { return DEF; }
 "::"                    { return AS; }
 ":"                    { return ASSIGN; }
 {OP_ARI}                { return OP_ARI; }
@@ -36,11 +25,6 @@ VAR_NAME [a-zA-Z][a-zA-Z0-9]*
 "{"                     { return LC; }
 "}"                     { return RC; }
 {STRING}                {
-                          // for(i = 1; i < strlen(yytext) - 1; i++) {
-                          //   yytext[i - 1] = yytext[i];
-                          // }
-                          // yytext[i - 1] = '\0';
-                          // strcpy(yylval.symbol, yytext);
                           yylval.type = 2;
                           return STRING;
                         }
@@ -49,7 +33,6 @@ VAR_NAME [a-zA-Z][a-zA-Z0-9]*
                           return BOOLEAN;
                         }
 {NUMBER}                {
-                          // yylval.value = atof(yytext);
                           yylval.type = 0;
                           return NUMBER;
                         }

@@ -2011,7 +2011,7 @@ yyreturn:
 
 #line 312 "wic.y"
 
-//-- FUNCTION DEFINITIONS ---------------------------------
+
 int main(int argc, char *argv[]) {
   symbolTableIndex = 0;
 
@@ -2020,8 +2020,6 @@ int main(int argc, char *argv[]) {
   fclose(yyin);
 
   printSymbolTable();
-
-  printf("Compilacion existosa.\n");
 
   return 0;
 }
@@ -2064,13 +2062,10 @@ int getType(char *name) {
 void printSymbolTable() {
   int i;
   char* type_name;
-  printf("Tabla de simbolos:\n");
-  printf("+----------------------+----------+\n");
-  printf("| Variable             | Tipo     |\n");
-  printf("+----------------------+----------+\n");
+  printf("Tabla de simbolos:\n\n");
+  printf(" Variable             | Tipo     \n\n");
   for (i = 0; i < symbolTableIndex; i++) {
-    printf("| %-20s | %-8s |\n", symbolTable[i].name, symbol_type_name[symbolTable[i].type]);
+    printf(" %-20s | %-8s \n", symbolTable[i].name, symbol_type_name[symbolTable[i].type]);
   }
-  printf("+----------------------+----------+\n");
 }
 
