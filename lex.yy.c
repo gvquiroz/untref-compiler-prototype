@@ -518,8 +518,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "wic.l"
-#line 2 "wic.l"
+#line 1 "cei.l"
+#line 2 "cei.l"
 #include "data_structs.h"
 #include "y.tab.h"
 #line 526 "lex.yy.c"
@@ -704,7 +704,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 13 "wic.l"
+#line 13 "cei.l"
 
 #line 710 "lex.yy.c"
 
@@ -801,73 +801,73 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "wic.l"
+#line 14 "cei.l"
 { return AS; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "wic.l"
+#line 15 "cei.l"
 { return ASSIGN; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 16 "wic.l"
+#line 16 "cei.l"
 { return OP_ARI; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "wic.l"
+#line 17 "cei.l"
 { return OP_LOG; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "wic.l"
+#line 18 "cei.l"
 { return TYPE_NUMBER; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "wic.l"
+#line 19 "cei.l"
 { return TYPE_BOOLEAN; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "wic.l"
+#line 20 "cei.l"
 { return TYPE_STRING; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "wic.l"
+#line 21 "cei.l"
 { return IF; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 22 "wic.l"
+#line 22 "cei.l"
 { return WHILE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 23 "wic.l"
+#line 23 "cei.l"
 { return LP; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 24 "wic.l"
+#line 24 "cei.l"
 { return RP; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 25 "wic.l"
+#line 25 "cei.l"
 { return LC; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 26 "wic.l"
+#line 26 "cei.l"
 { return RC; }
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 27 "wic.l"
+#line 27 "cei.l"
 {
                           yylval.type = 2;
                           return STRING;
@@ -875,7 +875,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "wic.l"
+#line 31 "cei.l"
 {
                           yylval.type = 1;
                           return BOOLEAN;
@@ -883,7 +883,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 35 "wic.l"
+#line 35 "cei.l"
 {
                           yylval.type = 0;
                           return NUMBER;
@@ -891,30 +891,30 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 39 "wic.l"
+#line 39 "cei.l"
 {
                           strcpy(yylval.symbol, yytext);
                           return VAR_NAME;
                         }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 43 "wic.l"
+#line 43 "cei.l"
 { return 0; }
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 44 "wic.l"
+#line 44 "cei.l"
 { }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 45 "wic.l"
+#line 45 "cei.l"
 { printf("Unrecognized token!: %s\n", yytext); exit(1); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 46 "wic.l"
+#line 46 "cei.l"
 ECHO;
 	YY_BREAK
 #line 921 "lex.yy.c"
@@ -1924,7 +1924,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 46 "wic.l"
+#line 46 "cei.l"
 
 
 

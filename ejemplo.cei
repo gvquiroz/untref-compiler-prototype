@@ -12,7 +12,7 @@ while (not variableBooleana) {
   variableBooleana : true
 }
 
-variableString : "Cocuzza"
+variableString : "Compiladores"
 
 variableNumerica : (variableNumerica - 10)
 
@@ -30,7 +30,7 @@ while (not variableBooleana) {
 
 }
 
-variableString : "Cocuzza"
+variableString : "Compiladores"
 
 variableNumerica : (variableNumerica - 10)
 

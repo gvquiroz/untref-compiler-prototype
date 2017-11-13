@@ -110,7 +110,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "wic.y"
+#line 1 "cei.y"
 
 #include <stdio.h>
 #include <string.h>
@@ -151,7 +151,7 @@ int symbolTableIndex;
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 21 "wic.y"
+#line 21 "cei.y"
 {
   double value;
   char symbol[50];
@@ -1422,32 +1422,32 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 42 "wic.y"
+#line 42 "cei.y"
     {}
     break;
 
   case 7:
-#line 47 "wic.y"
+#line 47 "cei.y"
     {}
     break;
 
   case 8:
-#line 49 "wic.y"
+#line 49 "cei.y"
     { addNode((yyvsp[(2) - (3)].symbol), T_NUMBER); }
     break;
 
   case 9:
-#line 50 "wic.y"
+#line 50 "cei.y"
     { addNode((yyvsp[(2) - (3)].symbol), T_BOOLEAN); }
     break;
 
   case 10:
-#line 51 "wic.y"
+#line 51 "cei.y"
     { addNode((yyvsp[(2) - (3)].symbol), T_STRING); }
     break;
 
   case 11:
-#line 53 "wic.y"
+#line 53 "cei.y"
     {
                                         SymbolType type = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1462,7 +1462,7 @@ yyreduce:
     break;
 
   case 12:
-#line 64 "wic.y"
+#line 64 "cei.y"
     {
                                         SymbolType type = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1477,7 +1477,7 @@ yyreduce:
     break;
 
   case 13:
-#line 75 "wic.y"
+#line 75 "cei.y"
     {
                                         SymbolType type = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1492,7 +1492,7 @@ yyreduce:
     break;
 
   case 14:
-#line 86 "wic.y"
+#line 86 "cei.y"
     {
                                         SymbolType type = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1507,7 +1507,7 @@ yyreduce:
     break;
 
   case 15:
-#line 97 "wic.y"
+#line 97 "cei.y"
     {
                                         SymbolType type_left = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1528,7 +1528,7 @@ yyreduce:
     break;
 
   case 16:
-#line 115 "wic.y"
+#line 115 "cei.y"
     {
                                             SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
 
@@ -1551,7 +1551,7 @@ yyreduce:
     break;
 
   case 17:
-#line 134 "wic.y"
+#line 134 "cei.y"
     {
                                             SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
 
@@ -1574,7 +1574,7 @@ yyreduce:
     break;
 
   case 18:
-#line 153 "wic.y"
+#line 153 "cei.y"
     {
                                             SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
 
@@ -1591,7 +1591,7 @@ yyreduce:
     break;
 
   case 19:
-#line 166 "wic.y"
+#line 166 "cei.y"
     {
                                             SymbolType type_left = getType((yyvsp[(2) - (5)].symbol));
 
@@ -1608,7 +1608,7 @@ yyreduce:
     break;
 
   case 20:
-#line 179 "wic.y"
+#line 179 "cei.y"
     {
                                             if ((yyvsp[(2) - (5)].type) != (yyvsp[(4) - (5)].type)) {
                                               yyerror("Error de tipos en operacion");
@@ -1619,7 +1619,7 @@ yyreduce:
     break;
 
   case 21:
-#line 186 "wic.y"
+#line 186 "cei.y"
     {
                                             if ((yyvsp[(2) - (5)].type) != (yyvsp[(4) - (5)].type)) {
                                               yyerror("Error de tipos en operacion");
@@ -1630,7 +1630,7 @@ yyreduce:
     break;
 
   case 22:
-#line 193 "wic.y"
+#line 193 "cei.y"
     {
                                             SymbolType type_rigth = getType((yyvsp[(4) - (5)].symbol));
 
@@ -1647,7 +1647,7 @@ yyreduce:
     break;
 
   case 23:
-#line 206 "wic.y"
+#line 206 "cei.y"
     {
                                             SymbolType type_rigth = getType((yyvsp[(4) - (5)].symbol));
 
@@ -1664,14 +1664,14 @@ yyreduce:
     break;
 
   case 24:
-#line 220 "wic.y"
+#line 220 "cei.y"
     {
                                     (yyval.type) = T_BOOLEAN;
                                   }
     break;
 
   case 25:
-#line 223 "wic.y"
+#line 223 "cei.y"
     {
                                     SymbolType type = getType((yyvsp[(2) - (2)].symbol));
 
@@ -1688,7 +1688,7 @@ yyreduce:
     break;
 
   case 26:
-#line 236 "wic.y"
+#line 236 "cei.y"
     {
                                     SymbolType type_left = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1705,14 +1705,14 @@ yyreduce:
     break;
 
   case 27:
-#line 249 "wic.y"
+#line 249 "cei.y"
     {
                                     (yyval.type) = T_BOOLEAN;
                                   }
     break;
 
   case 28:
-#line 252 "wic.y"
+#line 252 "cei.y"
     {
                                     SymbolType type_rigth = getType((yyvsp[(3) - (3)].symbol));
 
@@ -1729,7 +1729,7 @@ yyreduce:
     break;
 
   case 29:
-#line 265 "wic.y"
+#line 265 "cei.y"
     {
                                       SymbolType type_left = getType((yyvsp[(1) - (3)].symbol));
 
@@ -1752,12 +1752,12 @@ yyreduce:
     break;
 
   case 30:
-#line 285 "wic.y"
+#line 285 "cei.y"
     {}
     break;
 
   case 31:
-#line 286 "wic.y"
+#line 286 "cei.y"
     {
                                               SymbolType type = getType((yyvsp[(3) - (7)].symbol));
 
@@ -1773,12 +1773,12 @@ yyreduce:
     break;
 
   case 32:
-#line 299 "wic.y"
+#line 299 "cei.y"
     {}
     break;
 
   case 33:
-#line 300 "wic.y"
+#line 300 "cei.y"
     {
                                                 SymbolType type = getType((yyvsp[(3) - (7)].symbol));
 
@@ -2009,7 +2009,7 @@ yyreturn:
 }
 
 
-#line 312 "wic.y"
+#line 312 "cei.y"
 
 
 int main(int argc, char *argv[]) {
