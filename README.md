@@ -1,26 +1,13 @@
-Dependencias:
+Compilador con lex y yacc
 
-* make
-* gcc
-* lex
-* yacc
-
-Para compilar el compilador se debe correr:
+Para buildear el ejemplo
 
 ```shell
 make
 ```
 
-Para compilar un código generado en un editor de textos se debe realizar lo siguiente:
+Para correr el ejemplo
 
 ```shell
-./wic < ejemplo.wic
+./cei < ejemplo.cei
 ```
-
-o bien, puede ser usado como un editor:
-
-```shell
-./wic
-```
-
-Cuando termine de escribir su programa presione `Ctrl` + `D`.

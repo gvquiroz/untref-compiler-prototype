@@ -1,46 +1,48 @@
-variableNumerica :: number
-variableBooleana :: boolean
-variableString :: string
+miNumero :: number
+miBoolean :: boolean
+miString :: string
 
-variableNumerica : 123
+miVariableEntrada :: number
+miVariableResultado :: number
 
-while (variableBooleana) {
-  variableBooleana : false
+miVariableEntrada : 5
+miVariableResultado : 1
+
+while (miVariableEntrada > 0) {
+  miVariableResultado : (miVariableResultado * miVariableEntrada)
+  miVariableEntrada : (miVariableEntrada - 1)
+}
+miNumero : 123
+
+while (miBoolean) {
+  miBoolean : false
 }
 
-while (not variableBooleana) {
-  variableBooleana : true
+while (not miBoolean) {
+  miBoolean : true
 }
 
-variableString : "Compiladores"
+miString : "Docker"
 
-variableNumerica : (variableNumerica - 10)
+miNumero : (miNumero - 10)
 
-if (variableNumerica <  124) {
-  variableBooleana : (variableNumerica <  124)
-  variableNumerica : 0
+if (miNumero <  124) {
+  miBoolean : (miNumero <  124)
+  miNumero : 0
 }
 
-while (not variableBooleana) {
-  variableBooleana : true
+while (not miBoolean) {
+  miBoolean : true
 
-  if (variableNumerica <  124) {
-    variableBooleana : (variableNumerica <  124)
+  if (miNumero <  124) {
+    miBoolean : (miNumero <  124)
   }
 
 }
 
-variableString : "Compiladores"
+miString : "Propel"
 
-variableNumerica : (variableNumerica - 10)
+miNumero : (miNumero - 10)
 
-entrada :: number
-resultado :: number
 
-entrada : 5
-resultado : 1
 
-while (entrada > 0) {
-  resultado : (resultado * entrada)
-  entrada : (entrada - 1)
-}
