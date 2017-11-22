@@ -39,60 +39,77 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     TYPE_NUMBER = 258,
-     TYPE_BOOLEAN = 259,
-     TYPE_STRING = 260,
-     DEF = 261,
-     AS = 262,
-     ASSIGN = 263,
-     IF = 264,
-     WHILE = 265,
-     OP_ARI = 266,
-     OP_LOG = 267,
-     LP = 268,
-     RP = 269,
-     LC = 270,
-     RC = 271,
-     NUMBER = 272,
-     BOOLEAN = 273,
-     STRING = 274,
-     VAR_NAME = 275
+     INICIO = 258,
+     FIN = 259,
+     LEER = 260,
+     MOSTRAR = 261,
+     ASIG = 262,
+     MQ = 263,
+     HACER = 264,
+     SI = 265,
+     ENTONCES = 266,
+     SINO = 267,
+     SU = 268,
+     RU = 269,
+     ES = 270,
+     BOOL = 271,
+     STRING = 272,
+     PI = 273,
+     PD = 274,
+     LI = 275,
+     LD = 276,
+     OPSL = 277,
+     PC = 278,
+     NUMBER = 279,
+     VAR = 280,
+     OPS = 281,
+     OPM = 282
    };
 #endif
 /* Tokens.  */
-#define TYPE_NUMBER 258
-#define TYPE_BOOLEAN 259
-#define TYPE_STRING 260
-#define DEF 261
-#define AS 262
-#define ASSIGN 263
-#define IF 264
-#define WHILE 265
-#define OP_ARI 266
-#define OP_LOG 267
-#define LP 268
-#define RP 269
-#define LC 270
-#define RC 271
-#define NUMBER 272
-#define BOOLEAN 273
-#define STRING 274
-#define VAR_NAME 275
+#define INICIO 258
+#define FIN 259
+#define LEER 260
+#define MOSTRAR 261
+#define ASIG 262
+#define MQ 263
+#define HACER 264
+#define SI 265
+#define ENTONCES 266
+#define SINO 267
+#define SU 268
+#define RU 269
+#define ES 270
+#define BOOL 271
+#define STRING 272
+#define PI 273
+#define PD 274
+#define LI 275
+#define LD 276
+#define OPSL 277
+#define PC 278
+#define NUMBER 279
+#define VAR 280
+#define OPS 281
+#define OPM 282
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 21 "cei.y"
+#line 16 "analizador_sintactico.y"
 {
-  double value;
-  char symbol[50];
-  int type;
-  Variable var;
+  int numero;
+  char* string;
+  char  simbolo;
+  char variable[255];
+  char tipoDato;
+  ptrNodoArbol arbol;
+  Dato tipoDeDato;
 }
 /* Line 1529 of yacc.c.  */
-#line 96 "y.tab.h"
+#line 113 "analizador_sintactico.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
