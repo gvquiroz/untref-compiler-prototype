@@ -10,8 +10,6 @@ typedef struct tabla {
   Variable * variables[50];
 } Tabla;
 
-/*https://en.wikipedia.org/wiki/C_dynamic_memory_allocation*/
-
 Tabla tablaDeSimbolos;
 
 /*Definicion de funciones*/
@@ -132,15 +130,3 @@ void imprimir(){
      printf("\n");
 
 }
-/*
-main(){
-
-crear();
-insertar("variable1",'n');
-insertar("variable2",'p');
-insertar("variable3",'b');
-imprimir();
-system("PAUSE");
-
-}
-*/
