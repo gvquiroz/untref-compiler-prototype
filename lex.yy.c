@@ -981,8 +981,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lppn.l"
-#line 2 "lppn.l"
+#line 1 "cei.l"
+#line 2 "cei.l"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -1171,7 +1171,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 22 "lppn.l"
+#line 22 "cei.l"
 
 #line 1177 "lex.yy.c"
 
@@ -1268,143 +1268,143 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 23 "lppn.l"
+#line 23 "cei.l"
 { return INICIO; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 24 "lppn.l"
+#line 24 "cei.l"
 { return FIN;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 25 "lppn.l"
+#line 25 "cei.l"
 { return LEER;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 26 "lppn.l"
+#line 26 "cei.l"
 { return MOSTRAR;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 27 "lppn.l"
+#line 27 "cei.l"
 { return PI;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 28 "lppn.l"
+#line 28 "cei.l"
 { return PD;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 29 "lppn.l"
+#line 29 "cei.l"
 { return ASIG;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 30 "lppn.l"
+#line 30 "cei.l"
 { return LI;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 31 "lppn.l"
+#line 31 "cei.l"
 { return LD;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 32 "lppn.l"
+#line 32 "cei.l"
 { return MQ;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 33 "lppn.l"
+#line 33 "cei.l"
 { return HACER;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 34 "lppn.l"
+#line 34 "cei.l"
 { return SI;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 35 "lppn.l"
+#line 35 "cei.l"
 { return ENTONCES;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 36 "lppn.l"
+#line 36 "cei.l"
 { return SINO;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 37 "lppn.l"
+#line 37 "cei.l"
 { return SU;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 38 "lppn.l"
+#line 38 "cei.l"
 { return RU;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 39 "lppn.l"
+#line 39 "cei.l"
 { return ES;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 40 "lppn.l"
+#line 40 "cei.l"
 { yylval.tipoDeDato.simbolo = 'b'; yylval.tipoDeDato.texto = strdup(yytext); return OPS;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 41 "lppn.l"
+#line 41 "cei.l"
 { yylval.tipoDeDato.simbolo = strdup(yytext)[0]; yylval.tipoDeDato.texto = strdup(yytext); return OPS;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 42 "lppn.l"
+#line 42 "cei.l"
 { yylval.tipoDeDato.texto = strdup(yytext); yylval.tipoDeDato.simbolo = yytext[0] ;return OPS;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 43 "lppn.l"
+#line 43 "cei.l"
 { yylval.string = strdup(yytext);return BOOL;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 44 "lppn.l"
+#line 44 "cei.l"
 { yylval.string = strdup(yytext);return STRING;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 45 "lppn.l"
+#line 45 "cei.l"
 { return PC;}
 	YY_BREAK
 /* Si encuentra un número lo convierte a int y devuelve el token NUMBER */
 case 24:
 YY_RULE_SETUP
-#line 47 "lppn.l"
+#line 47 "cei.l"
 { yylval.numero = atoi(yytext); return NUMBER;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 48 "lppn.l"
+#line 48 "cei.l"
 { strcpy(yylval.variable,yytext); return VAR;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 50 "lppn.l"
+#line 50 "cei.l"
 { } /* ignorar tabs*/
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 51 "lppn.l"
+#line 51 "cei.l"
 {printf("error lexico \n"),yylineno; exit(1);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 53 "lppn.l"
+#line 53 "cei.l"
 ECHO;
 	YY_BREAK
 #line 1411 "lex.yy.c"
@@ -2416,7 +2416,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 53 "lppn.l"
+#line 53 "cei.l"
 
 
 

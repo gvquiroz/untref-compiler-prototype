@@ -1,4 +1,4 @@
 Inicio
-5 :: a;
+"hola" :: a;
 5 :: b;
 Fin

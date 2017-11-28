@@ -1,5 +1,5 @@
-# compiladores2015
-Untref Compiladores 2015
+# Compiladores2017
+UNTreF Compiladores 2017
 
 ## ¿ Cómo probar el ejemploLex.l ?
 1) flex -o ejemploLex.yy.c ejemploLex.l  -> esto genera el ejemploLex.yy.c
@@ -9,5 +9,5 @@ Untref Compiladores 2015
 
 ## ¿ Cómo compilar el código?
 1) bison -d analizador_sintactico.y
-2) flex lppn.l
+2) flex cei.l
 3) gcc analizador_sintactico.tab.c lex.yy.c
