@@ -1722,7 +1722,7 @@ char validarTipo(char tipo1, char operacion, char tipo2){
 
 				if (tipo1 == 'n') {
 
-					return 'Número';
+					return 'n';
 
 				}
 

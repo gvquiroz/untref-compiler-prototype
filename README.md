@@ -11,3 +11,5 @@ UNTreF Compiladores 2017
 1) bison -d analizador_sintactico.y
 2) flex cei.l
 3) gcc analizador_sintactico.tab.c lex.yy.c
+
+./a.out < 'nombre_archivo'

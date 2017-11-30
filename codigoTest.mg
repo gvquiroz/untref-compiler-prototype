@@ -6,7 +6,7 @@ mientras(a < 10){
   a+1 :: a;
   si (a = 15){
     15 :: d;
-    verdadero :: e;
+    true :: e;
     "string" :: f;
   };
 

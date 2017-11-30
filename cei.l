@@ -14,7 +14,8 @@ Ops_Mult "*"|"/"
 Ops_Logicas "no"|"y"|"o"|">"|"<"|"="|"<="|">="
 NUMBER [0-9]+
 STRING ["]{1}.{2,255}["]{1}
-BOOLEAN "verdadero"|"falso"
+BOOLEAN "true"|"false"
+
 /* Las variables deben comenzar con letras ya sea mayus o minus */
 VAR_NAME [a-zA-Z][a-zA-Z0-9]*
 
