@@ -1,5 +1,0 @@
-Inicio
-5 :: a;
-10 :: b;
-a+b :: c;
-Fin

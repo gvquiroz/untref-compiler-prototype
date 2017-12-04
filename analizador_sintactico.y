@@ -4,11 +4,12 @@
 #include <math.h>
 #include "tablaSimbolos.c"
 #include "arbol.c"
-
+//-- Lexer prototype required by bison, aka getNextToken()
 int yylex();
 int yyerror(const char *p) { printf("%s \n", p);}
 char validarTipo(char tipo1, char operacion, char tipo2);
 char* convertNumberToString(int numero);
+
 
 %}
 
@@ -22,6 +23,9 @@ char* convertNumberToString(int numero);
   Dato tipoDeDato;
 };
 
+/* Inicio Declaraciones */
+	/* Son de la forma: %token <nombre_del_terminal> */
+
 %token <tipoDato> INICIO FIN
 %token LEER MOSTRAR ASIG MQ HACER SI ENTONCES SINO SU RU ES BOOL STRING
 %token <simbolo> PI PD LI LD OPSL PC
@@ -31,7 +35,17 @@ char* convertNumberToString(int numero);
 %left <simbolo> OPM
 %type <tipoDato,arbol> expresion cuerpo programa sentencia condicional ciclo asignacion
 
+/* Fin Declaraciones */
+
 %%
+
+/* Reglas Gramaticales */
+/*
+Ej:
+expresion : expresion Ops_Suma expresion
+          | CTE
+		;
+*/
 
 /*
 Tipos de variables
@@ -67,7 +81,7 @@ condicional:    SI PI expresion PD LI cuerpo LD                           {{prin
 
 
 /* $3 es la variable, $1 es el tipo */
-expresion:      expresion OPS expresion {{ printf("%s\n", "Consola: Regla expresion"); $<tipoDeDato.arbol>$ = insertarNodo($<tipoDeDato.texto>2,&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3); printf("%s %c \n","Valor Simbolo: ",$<tipoDeDato.simbolo>2);$<tipoDato>$ = validarTipo($<tipoDeDato.simbolo>1,$<tipoDeDato.simbolo>2,$<tipoDato>3); }}
+expresion:      expresion OPS expresion {{ printf("%s\n", "Consola: Regla expresion"); $<tipoDeDato.arbol>$ = insertarNodo($<tipoDeDato.texto>2,&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3); printf("%s %c \n","Valor Simbolo: ",$<tipoDeDato.simbolo>2);$<tipoDato>$ = validarTipo($<tipoDeDato.simbolo>1,$<tipoDeDato.simbolo>2,$<tipoDato>3); }} /* deben concordar los tipos y la operacion y devolver el tipo resultante*/
               | NUMBER  {{printf("%s\n", "Consola: Regla numero"); $<tipoDeDato.arbol>$ = insertarHoja(convertNumberToString($1)); $<tipoDeDato.simbolo>$ = 'n'; printf("%s" "%c\n", "Consola: Tipo Dato: ",$<tipoDeDato.simbolo>$); }}
 		          | STRING {{printf("%s\n", "Consola: Regla string"); $<tipoDeDato.arbol>$  = insertarHoja($<string>1); $<tipoDeDato.simbolo>$ = 's';}}
 		          | BOOL {{printf("%s\n", "Consola: Regla boolean"); $<tipoDeDato.arbol>$  = insertarHoja($<string>1); $<tipoDeDato.simbolo>$ = 'b';printf("%s" "%c\n", "Consola: Tipo Dato: ",$<tipoDeDato.simbolo>$);}}
@@ -84,6 +98,7 @@ int main() {
   printf("Recorriendo Arbol Post Order \n \n");
   postOrder(ptrRaiz);
   return 0;
+  /* Inicializar tablaDeSimbolos*/
 }
 
 char validarTipo(char tipo1, char operacion, char tipo2){
@@ -92,22 +107,43 @@ char validarTipo(char tipo1, char operacion, char tipo2){
   printf("%s" "%c\n", "Consola: operacion: ",operacion);
 
   if (tipo1 == tipo2) {
-  	if(operacion == 'b'){
 
-  				return 'b';
-    } else if (operacion == '+' || operacion == '-' || operacion == '/' || operacion == '*') {
+	if(operacion == 'b'){
 
-  				if (tipo1 == 'n') {
-  					return 'n';
-  				} else {
-  						yyerror("Error: Operacion no permitida");
-  				}
-  	} else {
-  		yyerror("Error:Tipo de operador desconocido");
-  	}
-  } else {
-		yyerror("Error: tipos de variable incompatibles");
+				return 'b';
+
+    }
+
+	else if (operacion == '+' || operacion == '-' || operacion == '/' || operacion == '*') {
+
+				if (tipo1 == 'n') {
+
+					return 'n';
+
+				}
+
+				else{
+
+						yyerror("Error: Operacion no permitida");
+
+				}
+
+	}
+
+	else {
+
+		yyerror("Error:Tipo de operador desconocido");
+
+	}
+
   }
+
+  else{
+
+		yyerror("Error: tipos de variable incompatibles");
+
+  }
+
 };
 
 char* convertNumberToString(int numero){
@@ -115,3 +151,9 @@ char* convertNumberToString(int numero){
   sprintf(stringNum,"%d",numero);
   return stringNum;
 };
+
+/*
+Notas:
+Los terminales van en mayusculas y son los tokens devueltos por el analizador lexico.
+los auxiliares van en minusculas
+*/
