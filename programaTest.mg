@@ -7,7 +7,7 @@ mientras(a < 10){
   si (a :=: 15){
     15 :: d;
     true :: e;
-    "string" :: f;
+    "String" :: f;
   };
 
 };
