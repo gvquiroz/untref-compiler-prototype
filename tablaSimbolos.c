@@ -98,7 +98,7 @@ void imprimir(){
      for (i;i<50;i++){
 
          if (tablaDeSimbolos.variables[i]!=NULL){
-            printf("\t posicion %d | nombre: %s | tipo: %c \n",i,tablaDeSimbolos.variables[i]->nombre, getTipo(tablaDeSimbolos.variables[i]->nombre));
+            printf("\t posicion %d | variable: %s | tipo: %c \n",i,tablaDeSimbolos.variables[i]->nombre, getTipo(tablaDeSimbolos.variables[i]->nombre));
             }
      }
      printf("\n");

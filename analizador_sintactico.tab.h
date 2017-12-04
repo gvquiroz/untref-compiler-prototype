@@ -98,7 +98,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 16 "analizador_sintactico.y"
+#line 15 "analizador_sintactico.y"
 {
   int numero;
   char* string;
