@@ -9,6 +9,5 @@ mientras(a < 10){
     true :: e;
     "String" :: f;
   };
-
 };
 Fin
