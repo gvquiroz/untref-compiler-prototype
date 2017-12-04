@@ -119,12 +119,12 @@ int existe(char nombre[255]){
 
 void imprimir(){
 
-	 printf("Imprmiendo tabla de simbolos \n \n");
+	 printf("Imprimiendo tabla de simbolos \n \n");
      int i=0;
      for (i;i<50;i++){
 
          if (tablaDeSimbolos.variables[i]!=NULL){
-            printf("\t Tabla de simbolos en posicion %d | nombre: %s | tipo: %c \n",i,tablaDeSimbolos.variables[i]->nombre, getTipo(tablaDeSimbolos.variables[i]->nombre));
+            printf("\t posicion %d | nombre: %s | tipo: %c \n",i,tablaDeSimbolos.variables[i]->nombre, getTipo(tablaDeSimbolos.variables[i]->nombre));
             }
      }
      printf("\n");

@@ -57,35 +57,35 @@ s = string
 programa:         INICIO cuerpo FIN                                   {{$<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>2; ptrRaiz = $<tipoDeDato.arbol>2; }}
                 ;
 
-cuerpo:           sentencia PC cuerpo                                 {{printf("%s\n", "LOG: Regla sentencia;cuerpo "); $<tipoDeDato.arbol>$ = insertarNodo("s",&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3);}}
-		            | sentencia PC                                        {{printf("%s\n", "LOG: Regla sentencia; "); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
+cuerpo:           sentencia PC cuerpo                                 {{printf("%s\n", "Consola: Regla sentencia;cuerpo "); $<tipoDeDato.arbol>$ = insertarNodo("s",&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3);}}
+		            | sentencia PC                                        {{printf("%s\n", "Consola: Regla sentencia; "); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
 		            ;
 
 
-sentencia:      asignacion                                             {{printf("%s\n", "LOG: Regla sentencia asignacion"); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
-		          | condicional                                            {{printf("%s\n", "LOG: Regla sentencia condicional"); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
-              | ciclo                                                  {{printf("%s\n", "LOG: Regla sentencia ciclo"); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
+sentencia:      asignacion                                             {{printf("%s\n", "Consola: Regla sentencia asignacion"); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
+		          | condicional                                            {{printf("%s\n", "Consola: Regla sentencia condicional"); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
+              | ciclo                                                  {{printf("%s\n", "Consola: Regla sentencia ciclo"); $<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>1;}}
 		          ;
 
-asignacion:     expresion ASIG variable                               {{printf("%s\n", "LOG: Regla asignacion");insertar($<tipoDeDato.texto>3,$<tipoDeDato.simbolo>1); $<tipoDeDato.arbol>$ = insertarNodo("=",&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3 );}}
+asignacion:     expresion ASIG variable                               {{printf("%s\n", "Consola: Regla asignacion");insertar($<tipoDeDato.texto>3,$<tipoDeDato.simbolo>1); $<tipoDeDato.arbol>$ = insertarNodo("=",&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3 );}}
               ;
 
-variable:       VAR	{{printf("%s\n", "LOG: Regla variable"); $<tipoDeDato.arbol>$ = insertarHoja($<variable>1);$<tipoDeDato.texto>$ = $<variable>1; }}
+variable:       VAR	{{printf("%s\n", "Consola: Regla variable"); $<tipoDeDato.arbol>$ = insertarHoja($<variable>1);$<tipoDeDato.texto>$ = $<variable>1; }}
 
 
-ciclo:          MQ PI expresion PD LI cuerpo LD                           {{printf("%s\n", "LOG: Regla ciclo"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("w",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6);}}
+ciclo:          MQ PI expresion PD LI cuerpo LD                           {{printf("%s\n", "Consola: Regla ciclo"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("w",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6);}}
 
-condicional:    SI PI expresion PD LI cuerpo LD                           {{printf("%s\n", "LOG: Regla condicional"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("i",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6); }}
-              | SI PI expresion PD LI cuerpo LD SINO LI cuerpo LD         {{printf("%s\n", "LOG: Regla condicional 2"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");}; }}
+condicional:    SI PI expresion PD LI cuerpo LD                           {{printf("%s\n", "Consola: Regla condicional"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("i",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6); }}
+              | SI PI expresion PD LI cuerpo LD SINO LI cuerpo LD         {{printf("%s\n", "Consola: Regla condicional 2"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");}; }}
               ;
 
 
 /* $3 es la variable, $1 es el tipo */
-expresion:      expresion OPS expresion {{ printf("%s\n", "LOG: Regla expresion"); $<tipoDeDato.arbol>$ = insertarNodo($<tipoDeDato.texto>2,&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3); printf("%s %c \n","Valor Simbolo: ",$<tipoDeDato.simbolo>2);$<tipoDato>$ = validarTipo($<tipoDeDato.simbolo>1,$<tipoDeDato.simbolo>2,$<tipoDato>3); }} /* deben concordar los tipos y la operacion y devolver el tipo resultante*/
-              | NUMBER  {{printf("%s\n", "LOG: Regla numero"); $<tipoDeDato.arbol>$ = insertarHoja(convertNumberToString($1)); $<tipoDeDato.simbolo>$ = 'n'; printf("%s" "%c\n", "LOG: Tipo Dato: ",$<tipoDeDato.simbolo>$); }}
-		          | STRING {{printf("%s\n", "LOG: Regla string"); $<tipoDeDato.arbol>$  = insertarHoja($<string>1); $<tipoDeDato.simbolo>$ = 's';}}
-		          | BOOL {{printf("%s\n", "LOG: Regla boolean"); $<tipoDeDato.arbol>$  = insertarHoja($<string>1); $<tipoDeDato.simbolo>$ = 'b';printf("%s" "%c\n", "LOG: Tipo Dato: ",$<tipoDeDato.simbolo>$);}}
-		          | VAR	{{printf("%s\n", "LOG: Regla variable2"); $<tipoDeDato.simbolo>$ = getTipo($<variable>1); printf("%s" "%c\n", "LOG: Tipo Dato Variable: ",$<tipoDeDato.simbolo>$); $<tipoDeDato.arbol>$ = insertarHoja($<variable>1); }}
+expresion:      expresion OPS expresion {{ printf("%s\n", "Consola: Regla expresion"); $<tipoDeDato.arbol>$ = insertarNodo($<tipoDeDato.texto>2,&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3); printf("%s %c \n","Valor Simbolo: ",$<tipoDeDato.simbolo>2);$<tipoDato>$ = validarTipo($<tipoDeDato.simbolo>1,$<tipoDeDato.simbolo>2,$<tipoDato>3); }} /* deben concordar los tipos y la operacion y devolver el tipo resultante*/
+              | NUMBER  {{printf("%s\n", "Consola: Regla numero"); $<tipoDeDato.arbol>$ = insertarHoja(convertNumberToString($1)); $<tipoDeDato.simbolo>$ = 'n'; printf("%s" "%c\n", "Consola: Tipo Dato: ",$<tipoDeDato.simbolo>$); }}
+		          | STRING {{printf("%s\n", "Consola: Regla string"); $<tipoDeDato.arbol>$  = insertarHoja($<string>1); $<tipoDeDato.simbolo>$ = 's';}}
+		          | BOOL {{printf("%s\n", "Consola: Regla boolean"); $<tipoDeDato.arbol>$  = insertarHoja($<string>1); $<tipoDeDato.simbolo>$ = 'b';printf("%s" "%c\n", "Consola: Tipo Dato: ",$<tipoDeDato.simbolo>$);}}
+		          | VAR	{{printf("%s\n", "Consola: Regla variable2"); $<tipoDeDato.simbolo>$ = getTipo($<variable>1); printf("%s" "%c\n", "Consola: Tipo Dato Variable: ",$<tipoDeDato.simbolo>$); $<tipoDeDato.arbol>$ = insertarHoja($<variable>1); }}
               ;
 %%
 
@@ -102,9 +102,9 @@ int main() {
 }
 
 char validarTipo(char tipo1, char operacion, char tipo2){
-  printf("%s" "%c\n", "LOG: tipo1: ",tipo1);
-  printf("%s" "%c\n", "LOG: tipo2: ",tipo2);
-  printf("%s" "%c\n", "LOG: operacion: ",operacion);
+  printf("%s" "%c\n", "Consola: tipo1: ",tipo1);
+  printf("%s" "%c\n", "Consola: tipo2: ",tipo2);
+  printf("%s" "%c\n", "Consola: operacion: ",operacion);
 
   if (tipo1 == tipo2) {
 

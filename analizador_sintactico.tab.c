@@ -1401,77 +1401,77 @@ yyreduce:
 
   case 3:
 #line 60 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla sentencia;cuerpo "); (yyval.tipoDeDato.arbol) = insertarNodo("s",&(yyvsp[(1) - (3)].tipoDeDato.arbol),&(yyvsp[(3) - (3)].tipoDeDato.arbol));};}
+    {{printf("%s\n", "Consola: Regla sentencia;cuerpo "); (yyval.tipoDeDato.arbol) = insertarNodo("s",&(yyvsp[(1) - (3)].tipoDeDato.arbol),&(yyvsp[(3) - (3)].tipoDeDato.arbol));};}
     break;
 
   case 4:
 #line 61 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla sentencia; "); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (2)].tipoDeDato.arbol);};}
+    {{printf("%s\n", "Consola: Regla sentencia; "); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (2)].tipoDeDato.arbol);};}
     break;
 
   case 5:
 #line 65 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla sentencia asignacion"); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (1)].tipoDeDato.arbol);};}
+    {{printf("%s\n", "Consola: Regla sentencia asignacion"); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (1)].tipoDeDato.arbol);};}
     break;
 
   case 6:
 #line 66 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla sentencia condicional"); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (1)].tipoDeDato.arbol);};}
+    {{printf("%s\n", "Consola: Regla sentencia condicional"); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (1)].tipoDeDato.arbol);};}
     break;
 
   case 7:
 #line 67 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla sentencia ciclo"); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (1)].tipoDeDato.arbol);};}
+    {{printf("%s\n", "Consola: Regla sentencia ciclo"); (yyval.tipoDeDato.arbol) = (yyvsp[(1) - (1)].tipoDeDato.arbol);};}
     break;
 
   case 8:
 #line 70 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla asignacion");insertar((yyvsp[(3) - (3)].tipoDeDato.texto),(yyvsp[(1) - (3)].tipoDeDato.simbolo)); (yyval.tipoDeDato.arbol) = insertarNodo("=",&(yyvsp[(1) - (3)].tipoDeDato.arbol),&(yyvsp[(3) - (3)].tipoDeDato.arbol) );};}
+    {{printf("%s\n", "Consola: Regla asignacion");insertar((yyvsp[(3) - (3)].tipoDeDato.texto),(yyvsp[(1) - (3)].tipoDeDato.simbolo)); (yyval.tipoDeDato.arbol) = insertarNodo("=",&(yyvsp[(1) - (3)].tipoDeDato.arbol),&(yyvsp[(3) - (3)].tipoDeDato.arbol) );};}
     break;
 
   case 9:
 #line 73 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla variable"); (yyval.tipoDeDato.arbol) = insertarHoja((yyvsp[(1) - (1)].variable));(yyval.tipoDeDato.texto) = (yyvsp[(1) - (1)].variable); };}
+    {{printf("%s\n", "Consola: Regla variable"); (yyval.tipoDeDato.arbol) = insertarHoja((yyvsp[(1) - (1)].variable));(yyval.tipoDeDato.texto) = (yyvsp[(1) - (1)].variable); };}
     break;
 
   case 10:
 #line 76 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla ciclo"); if ((yyvsp[(3) - (7)].tipoDato) != 'b') {yyerror("Error: Operacion no permitida");};(yyval.tipoDeDato.arbol) = insertarNodo("w",&(yyvsp[(3) - (7)].tipoDeDato.arbol),&(yyvsp[(6) - (7)].tipoDeDato.arbol));};}
+    {{printf("%s\n", "Consola: Regla ciclo"); if ((yyvsp[(3) - (7)].tipoDato) != 'b') {yyerror("Error: Operacion no permitida");};(yyval.tipoDeDato.arbol) = insertarNodo("w",&(yyvsp[(3) - (7)].tipoDeDato.arbol),&(yyvsp[(6) - (7)].tipoDeDato.arbol));};}
     break;
 
   case 11:
 #line 78 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla condicional"); if ((yyvsp[(3) - (7)].tipoDato) != 'b') {yyerror("Error: Operacion no permitida");};(yyval.tipoDeDato.arbol) = insertarNodo("i",&(yyvsp[(3) - (7)].tipoDeDato.arbol),&(yyvsp[(6) - (7)].tipoDeDato.arbol)); };}
+    {{printf("%s\n", "Consola: Regla condicional"); if ((yyvsp[(3) - (7)].tipoDato) != 'b') {yyerror("Error: Operacion no permitida");};(yyval.tipoDeDato.arbol) = insertarNodo("i",&(yyvsp[(3) - (7)].tipoDeDato.arbol),&(yyvsp[(6) - (7)].tipoDeDato.arbol)); };}
     break;
 
   case 12:
 #line 79 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla condicional 2"); if ((yyvsp[(3) - (11)].tipoDato) != 'b') {yyerror("Error: Operacion no permitida");}; };}
+    {{printf("%s\n", "Consola: Regla condicional 2"); if ((yyvsp[(3) - (11)].tipoDato) != 'b') {yyerror("Error: Operacion no permitida");}; };}
     break;
 
   case 13:
 #line 84 "analizador_sintactico.y"
-    {{ printf("%s\n", "LOG: Regla expresion"); (yyval.tipoDeDato.arbol) = insertarNodo((yyvsp[(2) - (3)].tipoDeDato.texto),&(yyvsp[(1) - (3)].tipoDeDato.arbol),&(yyvsp[(3) - (3)].tipoDeDato.arbol)); printf("%s %c \n","Valor Simbolo: ",(yyvsp[(2) - (3)].tipoDeDato.simbolo));(yyval.tipoDato) = validarTipo((yyvsp[(1) - (3)].tipoDeDato.simbolo),(yyvsp[(2) - (3)].tipoDeDato.simbolo),(yyvsp[(3) - (3)].tipoDato)); };}
+    {{ printf("%s\n", "Consola: Regla expresion"); (yyval.tipoDeDato.arbol) = insertarNodo((yyvsp[(2) - (3)].tipoDeDato.texto),&(yyvsp[(1) - (3)].tipoDeDato.arbol),&(yyvsp[(3) - (3)].tipoDeDato.arbol)); printf("%s %c \n","Valor Simbolo: ",(yyvsp[(2) - (3)].tipoDeDato.simbolo));(yyval.tipoDato) = validarTipo((yyvsp[(1) - (3)].tipoDeDato.simbolo),(yyvsp[(2) - (3)].tipoDeDato.simbolo),(yyvsp[(3) - (3)].tipoDato)); };}
     break;
 
   case 14:
 #line 85 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla numero"); (yyval.tipoDeDato.arbol) = insertarHoja(convertNumberToString((yyvsp[(1) - (1)].numero))); (yyval.tipoDeDato.simbolo) = 'n'; printf("%s" "%c\n", "LOG: Tipo Dato: ",(yyval.tipoDeDato.simbolo)); };}
+    {{printf("%s\n", "Consola: Regla numero"); (yyval.tipoDeDato.arbol) = insertarHoja(convertNumberToString((yyvsp[(1) - (1)].numero))); (yyval.tipoDeDato.simbolo) = 'n'; printf("%s" "%c\n", "Consola: Tipo Dato: ",(yyval.tipoDeDato.simbolo)); };}
     break;
 
   case 15:
 #line 86 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla string"); (yyval.tipoDeDato.arbol)  = insertarHoja((yyvsp[(1) - (1)].string)); (yyval.tipoDeDato.simbolo) = 's';};}
+    {{printf("%s\n", "Consola: Regla string"); (yyval.tipoDeDato.arbol)  = insertarHoja((yyvsp[(1) - (1)].string)); (yyval.tipoDeDato.simbolo) = 's';};}
     break;
 
   case 16:
 #line 87 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla boolean"); (yyval.tipoDeDato.arbol)  = insertarHoja((yyvsp[(1) - (1)].string)); (yyval.tipoDeDato.simbolo) = 'b';printf("%s" "%c\n", "LOG: Tipo Dato: ",(yyval.tipoDeDato.simbolo));};}
+    {{printf("%s\n", "Consola: Regla boolean"); (yyval.tipoDeDato.arbol)  = insertarHoja((yyvsp[(1) - (1)].string)); (yyval.tipoDeDato.simbolo) = 'b';printf("%s" "%c\n", "Consola: Tipo Dato: ",(yyval.tipoDeDato.simbolo));};}
     break;
 
   case 17:
 #line 88 "analizador_sintactico.y"
-    {{printf("%s\n", "LOG: Regla variable2"); (yyval.tipoDeDato.simbolo) = getTipo((yyvsp[(1) - (1)].variable)); printf("%s" "%c\n", "LOG: Tipo Dato Variable: ",(yyval.tipoDeDato.simbolo)); (yyval.tipoDeDato.arbol) = insertarHoja((yyvsp[(1) - (1)].variable)); };}
+    {{printf("%s\n", "Consola: Regla variable2"); (yyval.tipoDeDato.simbolo) = getTipo((yyvsp[(1) - (1)].variable)); printf("%s" "%c\n", "Consola: Tipo Dato Variable: ",(yyval.tipoDeDato.simbolo)); (yyval.tipoDeDato.arbol) = insertarHoja((yyvsp[(1) - (1)].variable)); };}
     break;
 
 
@@ -1706,9 +1706,9 @@ int main() {
 }
 
 char validarTipo(char tipo1, char operacion, char tipo2){
-  printf("%s" "%c\n", "LOG: tipo1: ",tipo1);
-  printf("%s" "%c\n", "LOG: tipo2: ",tipo2);
-  printf("%s" "%c\n", "LOG: operacion: ",operacion);
+  printf("%s" "%c\n", "Consola: tipo1: ",tipo1);
+  printf("%s" "%c\n", "Consola: tipo2: ",tipo2);
+  printf("%s" "%c\n", "Consola: operacion: ",operacion);
 
   if (tipo1 == tipo2) {
 
