@@ -26,8 +26,8 @@ char* convertNumberToString(int numero);
 /* Inicio Declaraciones */
 	/* Son de la forma: %token <nombre_del_terminal> */
 
-%token <tipoDato> INICIO FIN
-%token LEER MOSTRAR ASIG MQ HACER SI ENTONCES SINO SU RU ES BOOL STRING
+%token <tipoDato> RUN STOP
+%token PRINT SHOW ASIG MQ DO IF THEN ELSE SU RU ES BOOL STRING
 %token <simbolo> PI PD LI LD OPSL PC
 %token <numero> NUMBER
 %token <variable,arbol> VAR
@@ -54,7 +54,7 @@ n = numero
 s = string
 */
 
-programa:         INICIO cuerpo FIN                                   {{$<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>2; ptrRaiz = $<tipoDeDato.arbol>2; }}
+programa:         RUN cuerpo STOP                                   {{$<tipoDeDato.arbol>$ = $<tipoDeDato.arbol>2; ptrRaiz = $<tipoDeDato.arbol>2; }}
                 ;
 
 cuerpo:           sentencia PC cuerpo                                 {{printf("%s\n", "Consola: Regla sentencia;cuerpo "); $<tipoDeDato.arbol>$ = insertarNodo("s",&$<tipoDeDato.arbol>1,&$<tipoDeDato.arbol>3);}}
@@ -75,8 +75,8 @@ variable:       VAR	{{printf("%s\n", "Consola: Regla variable"); $<tipoDeDato.ar
 
 ciclo:          MQ PI expresion PD LI cuerpo LD                           {{printf("%s\n", "Consola: Regla ciclo"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("w",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6);}}
 
-condicional:    SI PI expresion PD LI cuerpo LD                           {{printf("%s\n", "Consola: Regla condicional"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("i",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6); }}
-              | SI PI expresion PD LI cuerpo LD SINO LI cuerpo LD         {{printf("%s\n", "Consola: Regla condicional 2"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");}; }}
+condicional:    IF PI expresion PD LI cuerpo LD                           {{printf("%s\n", "Consola: Regla condicional"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");};$<tipoDeDato.arbol>$ = insertarNodo("i",&$<tipoDeDato.arbol>3,&$<tipoDeDato.arbol>6); }}
+              | IF PI expresion PD LI cuerpo LD ELSE LI cuerpo LD         {{printf("%s\n", "Consola: Regla condicional 2"); if ($<tipoDato>3 != 'b') {yyerror("Error: Operacion no permitida");}; }}
               ;
 
 

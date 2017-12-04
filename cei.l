@@ -21,23 +21,20 @@ VAR_NAME [a-zA-Z][a-zA-Z0-9]*
 
 
 %%
-"Inicio"            { return INICIO; }
-"Fin"			          { return FIN;}
-"leer"              { return LEER;}
-"mostrar"           { return MOSTRAR;}
+"Run"               { return RUN; }
+"Stop"			        { return STOP;}
+"print"             { return PRINT;}
+"show"              { return SHOW;}
 "("                 { return PI;}
 ")"                 { return PD;}
 "::"        	      { return ASIG;}
 "{"                 { return LI;}
 "}"                 { return LD;}
-"mientras"	        { return MQ;}
-"hacer"			        { return HACER;}
-"si"			          { return SI;}
-"entonces"		      { return ENTONCES;}
-"sino"			        { return SINO;}
-"sumar_uno"		      { return SU;}
-"restar_uno"	      { return RU;}
-"es"			          { return ES;}
+"while"	            { return MQ;}
+"do"			          { return DO;}
+"if"			          { return IF;}
+"then" 		          { return THEN;}
+"else"			        { return ELSE;}
 {Ops_Logicas}       { yylval.tipoDeDato.simbolo = 'b'; yylval.tipoDeDato.texto = strdup(yytext); return OPS;}
 {Ops_Suma}          { yylval.tipoDeDato.simbolo = strdup(yytext)[0]; yylval.tipoDeDato.texto = strdup(yytext); return OPS;}
 {Ops_Mult}          { yylval.tipoDeDato.texto = strdup(yytext); yylval.tipoDeDato.simbolo = yytext[0] ;return OPS;}

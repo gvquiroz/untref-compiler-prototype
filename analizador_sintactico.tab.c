@@ -66,16 +66,16 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     INICIO = 258,
-     FIN = 259,
-     LEER = 260,
-     MOSTRAR = 261,
+     RUN = 258,
+     STOP = 259,
+     PRINT = 260,
+     SHOW = 261,
      ASIG = 262,
      MQ = 263,
-     HACER = 264,
-     SI = 265,
-     ENTONCES = 266,
-     SINO = 267,
+     DO = 264,
+     IF = 265,
+     THEN = 266,
+     ELSE = 267,
      SU = 268,
      RU = 269,
      ES = 270,
@@ -94,16 +94,16 @@
    };
 #endif
 /* Tokens.  */
-#define INICIO 258
-#define FIN 259
-#define LEER 260
-#define MOSTRAR 261
+#define RUN 258
+#define STOP 259
+#define PRINT 260
+#define SHOW 261
 #define ASIG 262
 #define MQ 263
-#define HACER 264
-#define SI 265
-#define ENTONCES 266
-#define SINO 267
+#define DO 264
+#define IF 265
+#define THEN 266
+#define ELSE 267
 #define SU 268
 #define RU 269
 #define ES 270
@@ -485,11 +485,11 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "INICIO", "FIN", "LEER", "MOSTRAR",
-  "ASIG", "MQ", "HACER", "SI", "ENTONCES", "SINO", "SU", "RU", "ES",
-  "BOOL", "STRING", "PI", "PD", "LI", "LD", "OPSL", "PC", "NUMBER", "VAR",
-  "OPS", "OPM", "$accept", "programa", "cuerpo", "sentencia", "asignacion",
-  "variable", "ciclo", "condicional", "expresion", 0
+  "$end", "error", "$undefined", "RUN", "STOP", "PRINT", "SHOW", "ASIG",
+  "MQ", "DO", "IF", "THEN", "ELSE", "SU", "RU", "ES", "BOOL", "STRING",
+  "PI", "PD", "LI", "LD", "OPSL", "PC", "NUMBER", "VAR", "OPS", "OPM",
+  "$accept", "programa", "cuerpo", "sentencia", "asignacion", "variable",
+  "ciclo", "condicional", "expresion", 0
 };
 #endif
 
