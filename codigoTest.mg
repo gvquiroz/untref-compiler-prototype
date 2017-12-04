@@ -4,7 +4,7 @@ Inicio
 a+b :: c;
 mientras(a < 10){
   a+1 :: a;
-  si (a = 15){
+  si (a :=: 15){
     15 :: d;
     true :: e;
     "string" :: f;

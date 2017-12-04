@@ -11,7 +11,7 @@
 
 Ops_Suma "+"|"-"
 Ops_Mult "*"|"/"
-Ops_Logicas "not"|"and"|"or"|">"|"<"|"="|"<="|">="
+Ops_Logicas "not"|"and"|"or"|">"|"<"|":=:"|"<="|">="
 NUMBER [0-9]+
 STRING ["]{1}.{2,255}["]{1}
 BOOLEAN "true"|"false"
