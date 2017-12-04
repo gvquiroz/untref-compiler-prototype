@@ -1,3 +1,3 @@
 bison -d analizador_sintactico.y
-flex lppn.l
+flex cei.l
 gcc analizador_sintactico.tab.c lex.yy.c

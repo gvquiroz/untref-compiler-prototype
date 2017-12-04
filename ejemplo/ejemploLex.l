@@ -2,10 +2,10 @@
 %option yylineno
 
 Ops_Aritmeticas "+"|"-"|"*"|"/"
-Ops_Logicas "no"|"y"|"o"|"mayor_a"|"menor_a"|"igual_a"|"menor_igual_a"|"mayor_igual_a"
+Ops_Logicas "not"|"and"|"or"|">"|"<"|"=="|"<="|">="
 NUMBER [0-9]+
 STRING ["]{1}.{2,255}["]{1}
-BOOLEAN "verdadero"|"falso"
+BOOLEAN "true"|"false"
 VAR_NAME [a-zA-Z][a-zA-Z0-9]*
 
 
