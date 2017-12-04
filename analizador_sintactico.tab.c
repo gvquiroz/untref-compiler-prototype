@@ -1471,7 +1471,7 @@ yyreduce:
 
   case 17:
 #line 88 "analizador_sintactico.y"
-    {{printf("%s\n", "Consola: Regla variable2"); (yyval.tipoDeDato.simbolo) = getTipo((yyvsp[(1) - (1)].variable)); printf("%s" "%c\n", "Consola: Tipo Dato Variable: ",(yyval.tipoDeDato.simbolo)); (yyval.tipoDeDato.arbol) = insertarHoja((yyvsp[(1) - (1)].variable)); };}
+    {{printf("%s\n", "Consola: Regla variable"); (yyval.tipoDeDato.simbolo) = getTipo((yyvsp[(1) - (1)].variable)); printf("%s" "%c\n", "Consola: Tipo Dato Variable: ",(yyval.tipoDeDato.simbolo)); (yyval.tipoDeDato.arbol) = insertarHoja((yyvsp[(1) - (1)].variable)); };}
     break;
 
 
